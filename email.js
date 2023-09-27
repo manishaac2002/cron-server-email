@@ -1,7 +1,9 @@
 //Implementing cron server with email
 import cron from "node-cron";
 import express from "express";
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"
+import dotenv from "dotenv";
+dotenv.config()
 
 const app = express();
 
@@ -15,15 +17,15 @@ function sendMail() {
 	let mailTransporter = nodemailer.createTransport({
 		service: "gmail",
 		auth: {
-		user: "manishaac2002@gmail.com",
-		pass: "fwzvbsmanexmbgwt" //setting a password in the (google) gmail account setting
+		user: process.env.USER,
+		pass: process.env.PASSWORD //setting a password in the (google) gmail account setting
 		}
 	});
 	
 	// Setting credentials
 	let mailDetails = {
-		from: "manishaac2002@gmail.com",
-		to: "manisha.jsdev@gmail.com",
+		from: process.env.USER ,
+		to: process.env.RECEIVER,
 		subject: "Test mail using Cron job",
 		text: "Node.js cron job email"
 		+ " testing for GeeksforGeeks"
